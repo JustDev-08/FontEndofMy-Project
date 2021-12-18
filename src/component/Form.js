@@ -6,7 +6,8 @@ import axios from 'axios'
 
 export default function Form() {
     const [password , setPassword] = useState('')
-    const [url , setUrl] = useState('')
+    const [ml , setMl] = useState('')
+    const [url , setUrl] = useState('broker.hivemq.com')
     const [delay , setDelay] = useState(false)
     const [status , setStatus] = useState('None')
     return (
@@ -14,11 +15,13 @@ export default function Form() {
             <img src={logo} style={style.imgStyle}/>
             <h1 style={style.titleText}>You can Feed your pet's Here</h1>
             <input type='text' style={style.input} placeholder="password" onChange={e => setPassword(e.target.value)}/> <br/>
-            <input type='text' style={style.input} placeholder="url" onChange={e => setUrl(e.target.value)}/> <br/><br/>
+            <input type='text' style={style.input} placeholder="url" onChange={e => setUrl(e.target.value)} value={url}/> <br/>
+            <input type='text' style={style.input} placeholder="ปริมาณ" onChange={e => setMl(e.target.value)} /> <label>กรัม (g) </label><br/> <br/>
             <button style={style.button} disabled={delay} onClick={()=>{
                 setDelay(true)
                 setStatus('Wait......')
                 const data = {
+                    "ml"  : ml , 
                     "url": "https://" + url ,
                     "control":"feed",
                     "password" : password ,
