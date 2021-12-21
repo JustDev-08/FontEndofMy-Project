@@ -6,12 +6,9 @@ import { Link } from 'react-router-dom'
 export default function Check() {
     const [url, setUrl] = useState('')
     const [status, setStatus] = useState('None')
-    const [condition , serCondition] = useState(false)
     const [delay , setDelay]= useState(false)
     //func to check url api
-    useEffect(()=>{
-        serCondition(true)
-    },[])
+
      
     return (
         <div style={style.body}>
@@ -29,7 +26,7 @@ export default function Check() {
                 disabled={delay}
                 onClick={ () => {
             setDelay(true)
-        if (condition){
+        if (url !== ''){
             axios.post('https://apiexpressbyme.herokuapp.com/feed/api/can', {
             url: `https://${url}`
         }).then((res) => {
@@ -44,6 +41,8 @@ export default function Check() {
             setDelay(false)
 
         })
+        }else {
+            setStatus('ไม่สามารถทำรายการได้ เพราะ กรอกข้อมูลไม่ครบ')
         }
         
     }}
